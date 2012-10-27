@@ -1,7 +1,7 @@
 WTF.js 0.0.9
 =====
 
-Sets up easy-to-use Javascript inheritance for any project
+WTF.js aims to provide a simple and lightweight implementation of easy inheritance for Javascript projects of any size, without the bloat of extra functions or features. Use whatever other libraries or frameworks you want, and when you need simple objects to do simple inheritance, use WTF!
 
 Based loosely off of the inheritance paradigm used in Backbone.js (http://www.backbonejs.org)
 
@@ -14,8 +14,6 @@ Usage
 =====
 
 In order to use WTF.js you will need to include Underscore.js (http://www.underscorejs.org)
-
-WTF.js aims to provide a simple and lightweight implementation of easy inheritance for Javascript projects of any size, without the bloat of extra functions or features. Use whatever other libraries or frameworks you want, and when you need simple objects to do simple inheritance, use WTF!
 
 Here's an annotated example of how to use it:
 

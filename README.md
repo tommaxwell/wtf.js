@@ -8,7 +8,7 @@ Based loosely off of the inheritance paradigm used in Backbone.js (http://www.ba
 Tests
 =====
 
-In the tradition of TDD, this library is tested using Jasmine. To run the specs, simply open `spec/run.html` in a browser. More information about Jasmine can be found at (http://pivotal.github.com/jasmine)
+In the tradition of TDD, this library is tested using Jasmine. To run the specs, simply open `spec/run.html` in a browser. More information about Jasmine can be found at http://pivotal.github.com/jasmine
 
 Usage
 =====

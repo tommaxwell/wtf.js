@@ -3,7 +3,7 @@ WTF.js 0.0.9
 
 WTF.js aims to provide a simple and lightweight implementation of easy inheritance for Javascript projects of any size, without the bloat of extra functions or features. Use whatever other libraries or frameworks you want, and when you need simple objects to do simple inheritance, use WTF!
 
-Based loosely off of the inheritance paradigm used in Backbone.js (http://www.backbonejs.org)
+Based loosely off of the inheritance paradigm used in Backbone.js (http://backbonejs.org)
 
 Tests
 =====
@@ -102,7 +102,7 @@ new Bush43(); // alerts "My father is George H.W. Bush"
 Thanks
 =====
 
-* Backbone.js - http://www.backbonejs.org
-* Underscore.js - http://www.underscorejs.org
+* Backbone.js - http://backbonejs.org
+* Underscore.js - http://underscorejs.org
 * Jasmine - http://pivotal.github.com/jasmine
-* Pivotal Labs - http://www.pivotallabs.com
+* Pivotal Labs - http://pivotallabs.com/

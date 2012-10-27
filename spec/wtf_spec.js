@@ -5,6 +5,10 @@ describe("WTF", function () {
 		expect(initializeSpy).toHaveBeenCalled();
 	});
 
+	it("should be an instance of WTF", function() {
+	  expect(new WTF).toBeInstanceOf(WTF)
+	});
+
 	describe("#extend", function() {
 		var STFU, initializeSpy, staticMethodSpy, instanceMethodSpy;
 	  beforeEach(function() {
@@ -27,7 +31,10 @@ describe("WTF", function () {
 			});
 	  });
 
-		it("TODO TODO TODO - should test constructor? - TODO TODO TODO", function() {});
+		it("should be an instance of itself and of WTF", function() {
+		  expect(new STFU()).toBeInstanceOf(WTF);
+			expect(new STFU()).toBeInstanceOf(STFU);
+		});
 
 		it("should still call the initialize function when instantiated", function() {
 			expect(initializeSpy).not.toHaveBeenCalled();
@@ -81,6 +88,12 @@ describe("WTF", function () {
 				});
 			});
 
+			it("should be an instance of all of its ancestors", function() {
+			  expect(new ROFL()).toBeInstanceOf(ROFL);
+				expect(new ROFL()).toBeInstanceOf(STFU);
+				expect(new ROFL()).toBeInstanceOf(WTF);
+			});
+
 			it("should still call the initialize function when instantiated", function() {
 				expect(childInitializeSpy).not.toHaveBeenCalled();
 				new ROFL();
@@ -112,14 +125,15 @@ describe("WTF", function () {
 		});
 
 		describe("the super method", function() {
-		  var Animal, Human, parentFunctionSpy, childFunctionSpy;
+		  var Animal, Human, Clown, animalFunctionSpy, humanFunctionSpy, clownFunctionSpy;
 			beforeEach(function() {
-				parentFunctionSpy = jasmine.createSpy();
-				childFunctionSpy = jasmine.createSpy();
+				animalFunctionSpy = jasmine.createSpy();
+				humanFunctionSpy = jasmine.createSpy();
+				clownFunctionSpy = jasmine.createSpy();
 			  Animal = WTF.extend({
 					type: "animal",
 					doSomething: function() {
-					  parentFunctionSpy(this.type);
+					  animalFunctionSpy(this.type);
 					}
 				});
 
@@ -127,7 +141,15 @@ describe("WTF", function () {
 					type: "human",
 					doSomething: function() {
 						this.super.doSomething.call(this);
-					  childFunctionSpy(this.super.type);
+					  humanFunctionSpy(this.super.type);
+					}
+				});
+
+				Clown = Human.extend({
+					type: "clown",
+					doSomething: function() {
+					  this.super.super.doSomething.call(this);
+						clownFunctionSpy(this.super.super.type);
 					}
 				});
 			});
@@ -135,13 +157,21 @@ describe("WTF", function () {
 			it("should be able to access the parent by calling this.super", function() {
 				var dog = new Animal();
 				dog.doSomething();
-				expect(parentFunctionSpy).toHaveBeenCalledWith("animal");
-				expect(childFunctionSpy).not.toHaveBeenCalled();
-				parentFunctionSpy.reset();
-			  var bozo = new Human();
+				expect(animalFunctionSpy).toHaveBeenCalledWith("animal");
+				expect(humanFunctionSpy).not.toHaveBeenCalled();
+				animalFunctionSpy.reset();
+			  var jennifer = new Human();
+				jennifer.doSomething();
+				expect(animalFunctionSpy).toHaveBeenCalledWith("human");
+				expect(humanFunctionSpy).toHaveBeenCalledWith("animal");
+			});
+
+			it("should be able to chain super calls", function() {
+			  var bozo = new Clown();
 				bozo.doSomething();
-				expect(parentFunctionSpy).toHaveBeenCalledWith("human");
-				expect(childFunctionSpy).toHaveBeenCalledWith("animal");
+				expect(animalFunctionSpy).toHaveBeenCalledWith("clown");
+				expect(humanFunctionSpy).not.toHaveBeenCalled();
+				expect(clownFunctionSpy).toHaveBeenCalledWith("animal");
 			});
 		});
 	});

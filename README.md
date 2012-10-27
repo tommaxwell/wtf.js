@@ -13,7 +13,7 @@ In the tradition of TDD, this library is tested using Jasmine. To run the specs,
 Usage
 =====
 
-In order to use WTF.js you will need to include Underscore.js (http://www.underscorejs.org)
+In order to use WTF.js you will need to include Underscore.js (http://underscorejs.org)
 
 Here's an annotated example of how to use it:
 

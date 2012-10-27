@@ -5,6 +5,8 @@ WTF.js aims to provide a simple and lightweight implementation of easy inheritan
 
 Based loosely off of the inheritance paradigm used in Backbone.js (http://backbonejs.org)
 
+Includes fragments from Underscore.js to do forEach iteration and object extending (http://underscorejs.org)
+
 Tests
 =====
 
@@ -12,8 +14,6 @@ In the tradition of TDD, this library is tested using Jasmine. To run the specs,
 
 Usage
 =====
-
-In order to use WTF.js you will need to include Underscore.js (http://underscorejs.org)
 
 Here's an annotated example of how to use it:
 

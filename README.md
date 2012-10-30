@@ -64,9 +64,9 @@ var puppy = new Dog(); // this will alert "dog"
 
 // to demonstrate static properties and methods, we call
 // 'staticMethod' off of the Dog class, and not off the instance
+// for example, 'puppy.staticMethod("foo")' will throw an error,
+// as will trying to reference puppy.staticProperty
 Dog.staticMethod(Dog.staticProperty); // this will alert "wasup"
-
-// for example, 'puppy.staticMethod("foo")' will throw an error
 
 var Chihuahua = Dog.extend({
     i_am_a: "chihuahua",

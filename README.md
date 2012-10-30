@@ -15,7 +15,10 @@ In the tradition of TDD, this library is tested using Jasmine. To run the specs,
 Usage
 =====
 
-Here's an annotated example of how to use it:
+Here are two annotated examples on how you can use WTF. The first example demonstrates inheriting from `WTF`. The second example demonstrates grabbing the `extend` function from `WTF` directly, without having to inherit from it.
+
+Inheriting from WTF
+-----
 
 ````javascript
 // our base object extends WTF to get all of WTF.js's delicious benefits
@@ -33,6 +36,12 @@ new Animal(); // this will alert "animal"
 
 // now we are going to extend Animal
 // the extend function is propogated from parent to child
+// also note that extend takes two arguments, both of are optional
+
+// extend([instanceProps], [staticProps])
+
+// instance properties are defined when you instantiate the object
+// static properties are static on the class
 var Dog = Animal.extend({
     // override Animal's i_am_a with Dog's
     i_am_a: "dog",
@@ -44,9 +53,19 @@ var Dog = Animal.extend({
         // you need to use .call(this) to pass the context of the child to the parent
         this.super.initialize.call(this);
     }
-});
+}, {
+    staticProperty: "wasup",
+    staticMethod: function(arg) {
+    		alert(arg);
+    }
+ });
 
-new Dog(); // this will alert "dog"
+var puppy = new Dog(); // this will alert "dog"
+
+// to demonstrate the static property, we call the method
+// 'staticMethod' off of the Dog class, and not of the instance
+// for example, 'puppy.staticMethod("foo")' will throw an error
+Dog.staticMethod(Dog.staticProperty); // this will alert "wasup"
 
 var Chihuahua = Dog.extend({
     i_am_a: "chihuahua",
@@ -60,6 +79,51 @@ var Chihuahua = Dog.extend({
 
 new Chihuahua(); // this will alert "animal"
 ````
+
+Grabbing WTF's Functionality without Inheritance
+-----
+
+````javascript
+// Set up your base class yourself. In my example I've made the base
+// call 'setup' on anything that subclasses it, similar to the way WTF
+// sets you up with 'initialize'
+var BaseClass = function() {
+	this.setup.apply(this, arguments);
+}
+
+// here we assign WTF's extend function to the BaseClass
+BaseClass.extend = WTF.extend;
+
+// define our subclass, similar to before
+var SubClass = BaseClass.extend({
+	setup: function(arg) {
+		alert(arg);
+	}
+});
+
+new SubClass("foo"); // this will alert "foo"
+
+// now we'll set up a sub class of our SubClass
+// this is just to demonstrate that static properties work just as before
+var SubSubClass = SubClass.extend({
+	setup: function(arg) {
+		alert(arg);
+	}
+}, {
+	staticProperty: "baz",
+	staticMethod: function(arg) {
+		alert(arg);
+	}
+});
+
+new SubSubClass("bar"); // this will alert "bar"
+
+SubSubClass.staticMethod(SubSubClass.staticProperty); // this will alert "baz"
+````
+
+Configuring WTF
+=====
+
 
 WTF.js sets up two objects in the global namespace that you need to avoid colliding with in your own code, `WTF` and `WTFConfigs`. `WTFConfigs`, defined at the top of the `wtf.js` file, defines two configurations that you should not hesitate to change for any reason:
 

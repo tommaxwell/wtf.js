@@ -62,10 +62,11 @@ var Dog = Animal.extend({
 
 var puppy = new Dog(); // this will alert "dog"
 
-// to demonstrate the static property, we call the method
-// 'staticMethod' off of the Dog class, and not of the instance
-// for example, 'puppy.staticMethod("foo")' will throw an error
+// to demonstrate static properties and methods, we call
+// 'staticMethod' off of the Dog class, and not off the instance
 Dog.staticMethod(Dog.staticProperty); // this will alert "wasup"
+
+// for example, 'puppy.staticMethod("foo")' will throw an error
 
 var Chihuahua = Dog.extend({
     i_am_a: "chihuahua",
@@ -96,6 +97,7 @@ BaseClass.extend = WTF.extend;
 
 // define our subclass, similar to before
 var SubClass = BaseClass.extend({
+    i_am_a: "subclass",
 	setup: function(arg) {
 		alert(arg);
 	}
@@ -106,6 +108,7 @@ new SubClass("foo"); // this will alert "foo"
 // now we'll set up a sub class of our SubClass
 // this is just to demonstrate that static properties work just as before
 var SubSubClass = SubClass.extend({
+    i_am_a: "subsubclass",
 	setup: function(arg) {
 		alert(arg);
 	}
@@ -116,9 +119,12 @@ var SubSubClass = SubClass.extend({
 	}
 });
 
-new SubSubClass("bar"); // this will alert "bar"
+var sub = new SubSubClass("bar"); // this will alert "bar"
 
-SubSubClass.staticMethod(SubSubClass.staticProperty); // this will alert "baz"
+alert(SubSubClass.staticProperty); // this will alert "baz"
+
+// also, you still get the 'super' reference once you extend
+SubSubClass.staticMethod(sub.super.i_am_a); // this will alert "subclass", not "subsubclass"
 ````
 
 Configuring WTF
